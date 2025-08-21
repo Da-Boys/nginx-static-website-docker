@@ -8,7 +8,7 @@ The Dockerfile used for building the image is located at [codes/Dockerfile](code
 ---
 
 ## 🖼 Architecture Diagram
-![Architecture](architecture.png)
+![Architecture](architecture.jpg)
 
 ---
 
